@@ -35,7 +35,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func applicationWillResignActive(_ application: UIApplication) {
         // UserNotification 프레임워크를 이용한 로컬 알림 (iOS 10 이상)
         if #available(iOS 10.0, *) {
-            print("iOS 10 이상")
             // 알림 동의 여부를 확인
             UNUserNotificationCenter.current().getNotificationSettings { settings in
                 if settings.authorizationStatus == UNAuthorizationStatus.authorized {
@@ -86,13 +85,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         if #available(iOS 10.0, *) {
-            print("iOS 10 이상")
             // 경고창, 배지, 사운드를 사용하는 알림 환경 정보를 생성하고, 사용자 동의 여부 창을 실행
             let notiCenter = UNUserNotificationCenter.current()
             notiCenter.requestAuthorization(options: [.alert, .badge, .sound]) { (didAllow, e) in }
             notiCenter.delegate = self
         } else {
-            print("iOS 9 이하")
             // 경고창, 배지, 사운드를 사용하는 알림 환경 정보를 생성하고, 이를 애플리케이션에 저장
             let setting = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
             application.registerUserNotificationSettings(setting)
